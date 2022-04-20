@@ -1,42 +1,80 @@
 {
-  "name": "msalepj",
-  "version": "0.1.0",
+  "name": "critfy",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve --mode dev",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "uat": "vue-cli-service serve --mode uat",
+    "build:dev": "vue-cli-service build --mode dev",
+    "build:uat": "vue-cli-service build --mode uat",
+    "build:pro": "vue-cli-service build --mode pro"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "axios": "0.18.1",
+    "echarts": "4.2.1",
+    "element-ui": "2.13.0",
+    "jquery": "3.5.1",
+    "js-cookie": "2.2.0",
+    "normalize.css": "7.0.0",
+    "nprogress": "^0.2.0",
+    "pdfvuer": "1.6.1",
+    "printd": "^1.4.2",
+    "register-service-worker": "1.6.2",
+    "screenfull": "^5.0.2",
+    "socket.io-client": "2.2.0",
+    "splitpanes": "^2.3.8",
+    "uuidv4": "^6.2.13",
+    "v-viewer": "1.5.1",
+    "vue": "2.6.10",
+    "vue-avatar": "2.2.0",
+    "vue-credit-card-validation": "0.1.10",
+    "vue-moment": "^4.1.0",
+    "vue-numeric-currency": "2.4.3",
+    "vue-router": "3.0.2",
+    "vue-splitpane": "^1.0.6",
+    "vue-tel-input": "4.4.2",
+    "vue2-editor": "^2.10.2",
+    "vuex": "3.1.0",
+    "xlsx": "^0.16.5"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "vue-template-compiler": "^2.6.11"
+    "@babel/core": "7.0.0",
+    "@babel/register": "7.0.0",
+    "@vue/cli-plugin-babel": "3.5.3",
+    "@vue/cli-plugin-eslint": "^3.9.1",
+    "@vue/cli-plugin-unit-jest": "3.5.3",
+    "@vue/cli-service": "3.5.3",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "autoprefixer": "^9.5.1",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "10.0.1",
+    "babel-jest": "23.6.0",
+    "chalk": "2.4.2",
+    "chokidar": "2.1.5",
+    "connect": "3.6.6",
+    "eslint": "5.15.3",
+    "eslint-plugin-vue": "5.2.2",
+    "html-webpack-plugin": "3.2.0",
+    "husky": "1.3.1",
+    "lint-staged": "8.1.5",
+    "mockjs": "1.0.1-beta3",
+    "node-sass": "^4.9.0",
+    "plop": "2.3.0",
+    "runjs": "^4.3.2",
+    "sass-loader": "^7.1.0",
+    "script-ext-html-webpack-plugin": "2.1.3",
+    "script-loader": "0.7.2",
+    "serve-static": "^1.13.2",
+    "svg-sprite-loader": "4.1.3",
+    "svgo": "1.2.0",
+    "vue-template-compiler": "2.6.10"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
+  "engines": {
+    "node": ">=8.9",
+    "npm": ">= 3.0.0"
   },
   "browserslist": [
     "> 1%",
-    "last 2 versions",
-    "not dead"
+    "last 2 versions"
   ]
 }
