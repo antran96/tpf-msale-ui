@@ -34,7 +34,7 @@ export const constantRoutes = [
       }
     ]
   },
-
+  // add route here
   { path: '*', redirect: '/404', hidden: true }
 ]
 

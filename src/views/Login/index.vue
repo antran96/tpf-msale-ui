@@ -1,19 +1,17 @@
 <template>
-  <div>Login Page</div>
+  <div>
+    Login
+  </div>
 </template>
 
 <script>
-
 export default {
-  name: "login-page",
+  name: 'Login',
   data() {
     return {
-    };
+    }
   },
-  
-  created() {},
-  
   methods: {
-  },
-};
+  }
+}
 </script>

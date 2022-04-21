@@ -1,17 +1,17 @@
-# Fico mSale
+# Fico Webportal
 ## Version: 2.0.0
 UAT
 ## Installation
 **1. Kiểm tra và cài đặt môi trường cần thiết:**
 - Download, Install: **Nodejs** (global)
-- Install module **vue-cli-service** (global)
+- Install module **vue-cli-service** global
 ```
 npm i vue-cli-service -g --s
 ```
 **2. Clone Project và cài đặt:**
 ```
-git clone https://fico-portaltest.tpb.vn/gitlab/tpf-service/tpf-msale-ui.git
-cd tpf-msale-ui
+git clone https://fico-portaltest.tpb.vn/gitlab/tpf-service/tpf-service-webportal-v2.git webportal-v2
+cd webportal-v1
 git pull origin { Branch_name | all }
 npm i --s
 ```
@@ -26,12 +26,4 @@ npm run dev
 npm run build:dev
 npm run build:uat
 npm run build:pro
-```
-
-## InHome
-```
-document.cookie = "token=8d037583-8724-457c-8f25-3f1e0009cdc2";
-```
-```
-localStorage.setItem('INFOR_USER', JSON.stringify({"active":true,"exp":1650241012,"user_name":"longdv1","authorities":["role_root"],"client_id":"tpf-service-root","scope":["tpf-service-root"],"departments":["document_check","thuc","loan_booking","IT","it","sale_team","long","data_entry","repayment"],"projects":["dataentry","momo","CMS","nostro"],"branches":["LONG XUYEN DSA","PHAN THIET DSA","HA TINH DSA","VINID","CAN THO DSA","TRUSTING SOCIAL","SMARTBANK DSA","DONG NAI DSA","IS","HAI DUONG DSA","CENTRE CAPITAL DSA","DA LAT DSA","FSERVICES","QUANG NINH DSA","NAM DINH DSA","DAK LAK DSA","HAI PHONG DSA","TP Finance HO","VUNG TAU DSA","HA NOI DSA","DIGIPAY","HCM DSA","THIEN SON DSA","TTF","FPT","THANH HOA DSA","KALAPA","TIEN GIANG DSA","BINH DUONG DSA","SAMO","ONECLICK","HO CHI MINH","THAI NGUYEN DSA","MOMO","HUE DSA","SMARTNET","BAC NINH DSA","TP Finance","NHA TRANG DSA","FIN","TAM KY DSA","TAY NINH DSA","VINH PHUC DSA","VINH DSA","DA NANG DSA","KIEN GIANG DSA","INTERNAL DSA","KIOT BANK","KIM AN DSA"],"optional":{"roles":["admin_user","account_getall","account_create","account_master","account_edit","account_delete","client_view","client_create","client_edit","client_delete","de_lead_view","de_lead_create","de_lead_return","de_lead_admin","de_report_view","momo_de_view","momo_dc_view","momo_lb_view","momo_as_view","momo_acca_view","repayment_view","autoassign_view","checkapp_view","smart_net_view","de_auto_routing_view","de_auto_routing_api_view","auto_allocation_supervisor_view","auto_allocation_leader_view","auto_allocation_user_view","auto_allocation_configuration_view","auto_allocation_create","auto_allocation_delete","auto_allocation_edit","eform_supervisor_view","eform_leader_view","eform_qa_leader_view","eform_qa_user_view","eform_user_view","eform_support_view","eform_create","eform_edit","eform_delete","cms_settings_view","cms_sale_view","cms_sale_update","cms_sale_admin","cms_cp_update","cms_cp_view","cms_cp_admin"],"avatar":"happy","settings":{"cms/Sale":["id_card_number","disbursal_date","customer_name","application_number","schema_name","dsa_code","branch_name","current_status","team_lead","supervisor","manager","update_user"]},"status":"await"}}))
 ```

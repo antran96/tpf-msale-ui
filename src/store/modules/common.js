@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
+// import * as io from 'socket.io-client'
 import * as cookie from '@/utils/cookie'
 
 const state = {
@@ -54,11 +55,14 @@ const actions = {
       }).catch(error => {
         dispatch('fnHandleError', { model: model, error: error })
         reject(error)
+      }).finally(() => {
+        rootState[model.root][model.state]._isLoading = false
+        service = undefined
       })
     })
   },
 
-  fnHandleSuccess({ rootState }, { model, success }) {
+  fnHandleSuccess({ dispatch, rootState }, { model, success }) {
     return new Promise((resolve) => {
       rootState[model.root][model.state]._stt = 'success'
       if (success.data === null) {
@@ -66,6 +70,10 @@ const actions = {
       } else if (Array.isArray(success.data)) {
         rootState[model.root][model.state].list = success.data || []
         rootState[model.root][model.state].total = success.headers['x-pagination-total'] || 0
+      }
+
+      if (success.data && success.data.access_token) {
+        cookie.setToken(success.data.access_token, success.data.expires_in)
       }
       resolve(success.data)
     })
@@ -79,12 +87,12 @@ const actions = {
     }
     const filter = state.statusCode[code]
     if (filter) {
-      Vue.prototype.$showMess(filter.type, filter.message)
+      // Vue.prototype.$showMess(filter.type, filter.message)
       if (filter.excuteAction) {
         dispatch(filter.excuteAction, null, { root: true })
       }
     } else {
-      Vue.prototype.$showMess('error', error.response.data.message)
+      // Vue.prototype.$showMess('error', error.response.data.message)
     }
   }
 

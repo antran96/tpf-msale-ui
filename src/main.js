@@ -5,8 +5,8 @@ import Element from 'element-ui'
 
 import locale from 'element-ui/lib/locale/lang/en'
 import 'normalize.css/normalize.css'
-// import '@/styles/element-variables.scss'
-// import '@/styles/index.scss'
+import '@/styles/element-variables.scss'
+import '@/styles/index.scss'
 
 import App from './App'
 import store from './store'
@@ -15,7 +15,7 @@ import router from './router'
 import '@/utils/icon'
 import * as permission from '@/utils/permission'
 import * as fnCommon from '@/utils/fn-common'
-// require('./registerServiceWorker.js')
+require('./registerServiceWorker.js')
 permission.permissionRoute()
 
 import * as cookie from '@/utils/cookie'
@@ -31,7 +31,7 @@ Vue.mixin({
   methods: {
     fnCookie: () => cookie,
     fnCommon: () => fnCommon,
-    permission: () => permission,
+    permission: () => permission
   }
 })
 

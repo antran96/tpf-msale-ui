@@ -1,7 +1,5 @@
 const state = {
-  sidebar: false,
-  rightPanel: false,
-  device: 'desktop'
+  sidebar: false
 }
 
 const actions = {}
