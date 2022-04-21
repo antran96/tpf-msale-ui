@@ -1,6 +1,6 @@
 # Fico Webportal
 ## Version: 2.0.0
-UAT
+UAT 
 ## Installation
 **1. Kiểm tra và cài đặt môi trường cần thiết:**
 - Download, Install: **Nodejs** (global)
