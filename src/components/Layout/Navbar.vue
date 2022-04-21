@@ -24,6 +24,7 @@
     </div>
 
   </div>
+  </div>
 </template>
 
 <script>
@@ -38,7 +39,7 @@ export default {
   },
 
   watch: {
-    $route (to, from) {
+    $route (to) {
       this.page = to.name
     }
   },

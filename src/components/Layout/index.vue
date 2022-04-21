@@ -1,9 +1,9 @@
 <template>
   <div :class="classObj" class="app-wrapper">
-    <sidebar class="sidebar-container" />
+    <side-bar class="sidebar-container" />
     <div class="main-container">
       <div>
-        <navbar />
+        <nav-bar />
       </div>
       <app-main />
     </div>
@@ -13,14 +13,14 @@
 
 <script>
 import AppMain from "./AppMain";
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
+import NavBar from "./NavBar";
+import SideBar from "./SideBar";
 import RightPanel from "./RightPanel";
 
 export default {
-  name: "Layout",
+  name: "lay-out",
 
-  components: { AppMain, Navbar, Sidebar, RightPanel },
+  components: { AppMain, NavBar, SideBar, RightPanel },
 
   computed: {
     classObj() {
