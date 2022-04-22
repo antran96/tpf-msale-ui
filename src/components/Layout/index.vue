@@ -13,25 +13,25 @@
 
 <script>
 import AppMain from "./AppMain";
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
+// import NavBar from "./NavBar";
+// import SideBar from "./SideBar";
 
 export default {
   name: "Layout",
 
-  components: { AppMain, Navbar, Sidebar },
+  components: { AppMain },
 
   computed: {
     classObj() {
       return {
         hideSidebar: this.state.app.sidebar,
         openSidebar: !this.state.app.sidebar
-      };
+      }
     }
   },
   methods: {
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
