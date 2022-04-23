@@ -6,9 +6,14 @@
 
 <script>
 export default {
-  name: 'App',
+  // name: "App",
 
-  created() {
-  }
+  created() {}
 }
 </script>
+<style lang="scss">
+#app {
+  background-color: var(--bgColor);
+  font-size: var(--fontSize);
+}
+</style>

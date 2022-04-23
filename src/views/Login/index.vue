@@ -1,13 +1,27 @@
 <template>
-  <div class="login-container">
-    <silk-layout width="100vw" height="100vh" />
+  <div
+    class="login-container"
+    :style="{ backgroundImage: 'url(' + bgLogin + ')' }"
+    style="
+      height: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+    "
+  >
+    <div>
+      <img class="img-logo" src="icon.png" />
+    </div>
+    <div class="title-container">
+      <div class="title">
+        <p>Welcome to</p>
+        <p>FicoPortal</p>
+      </div>
+    </div>
+
     <div class="login-page">
       <div class="login-page--bg">
         <el-form class="login-page--form">
-          <div>
-            <!-- <img src="img_avatar2.png" /> -->
-          </div>
-
           <div>
             <el-form-item prop="username">
               <label><b>Username</b></label>
@@ -15,7 +29,6 @@
                 <svg-icon icon-class="user" />
               </span>
               <el-input
-                ref="username"
                 placeholder="Username"
                 name="username"
                 type="text"
@@ -32,7 +45,6 @@
                 </span>
                 <el-input
                   type="password"
-                  ref="password"
                   placeholder="Password"
                   name="password"
                   tabindex="2"
@@ -49,10 +61,15 @@
 
             <div class="el-btn-login">
               <el-button
-                style="background-color: white; color: black"
+                style="
+                  border-radius: 5px;
+                  background-color: white;
+                  color: black;
+                "
                 type="primary"
-                >Login</el-button
               >
+                Login
+              </el-button>
             </div>
           </div>
         </el-form>
@@ -62,10 +79,14 @@
 </template>
 
 <script>
+import bgLogin from "@/assets/images/bgLoginClound.png";
+
 export default {
-  name: "Login",
+  // name: "Login",
   data() {
-    return {};
+    return {
+      bgLogin: bgLogin,
+    };
   },
   methods: {},
 };
@@ -77,18 +98,19 @@ export default {
     display: inline-block;
     height: 40px;
     input {
-      background-color: #1a237e;
+      background-color: #3f51b5;
       border: 0px;
       -webkit-appearance: none;
-      border-radius: 0px;
+      border-radius: 5px;
       padding: 12px 5px 12px 15px;
       color: #ffffff;
       height: 40px;
       caret-color: #ffffff;
-      &:-webkit-autofill {
-        box-shadow: 0 0 0px 1000px var(--clForm100) inset !important;
-        -webkit-text-fill-color: #ffffff !important;
-      }
+      box-shadow: 0 5px 0px 0px #3f51b5, 0 0 1px 0px #3f51b5;
+      // &:-webkit-autofill {
+      //   box-shadow: 0 0 0px 1000px var(--clForm100) inset !important;
+      //   -webkit-text-fill-color: #ffffff !important;
+      // }
     }
   }
   .el-form-item {
@@ -105,6 +127,41 @@ export default {
     justify-content: center;
     padding-bottom: 15px;
   }
+  .img-logo {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-top: 5rem;
+    width: 10%;
+  }
+  .title-container {
+    position: relative;
+    text-align: center;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    .title {
+      color: var(--clForm100);
+      text-align: center;
+      font-weight: bold;
+      p:first-child {
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+        font-family: "Comic Sans MS", cursive, sans-serif;
+      }
+      p:last-child {
+        font-size: 2rem;
+        line-height: 2rem;
+        margin-top: -5px;
+      }
+    }
+  }
+  .bg-login {
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
 }
 </style>
 
@@ -119,21 +176,21 @@ export default {
   }
   &-container {
     .login-page {
-      height: 60vh;
-      top: 25vh;
+      height: 40vh;
+      top: 2vh;
       position: relative;
-      width: 30%;
-      left: 35%;
-      border-radius: 40px;
+      width: 25%;
+      left: 38%;
+      border-radius: 5px;
       overflow: hidden;
-      box-shadow: 0 2px 18px 3px rgba(0, 0, 0, 0.6), 0 0 6px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 2px 1px 0px #3f51b5, 0 0 1px #3f51b5;
       &--bg {
         height: 100%;
         width: 100%;
         background-size: 51%;
         background-repeat: no-repeat;
         background-position: 15px;
-        background-color: #7986cb;
+        background-color: rgb(63, 81, 181, 53);
         position: absolute;
       }
       &--form {
@@ -159,28 +216,6 @@ export default {
           display: inline-block;
           line-height: 30px;
         }
-        .title-container {
-          position: relative;
-          text-align: center;
-          align-items: center;
-          margin-top: 2rem;
-          margin-bottom: 2rem;
-          .title {
-            color: var(--clForm100);
-            text-align: center;
-            font-weight: bold;
-            p:first-child {
-              font-size: 1.5rem;
-              line-height: 1.5rem;
-              font-family: "Comic Sans MS", cursive, sans-serif;
-            }
-            p:last-child {
-              font-size: 2rem;
-              line-height: 2rem;
-              margin-top: -5px;
-            }
-          }
-        }
         .show-pwd {
           position: absolute;
           right: 10px;
@@ -195,3 +230,4 @@ export default {
   }
 }
 </style>
+
