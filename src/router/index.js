@@ -22,6 +22,11 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/template',
+    component: () => import('@/views/Template/index'),
+    hidden: true
+  },
+  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
@@ -37,19 +42,7 @@ export const constantRoutes = [
   /* add route here */
 
   /* -------------- */
-  {
-    path: '/template',
-    component: Layout,
-    redirect: 'noRedirect',
-    hidden: true,
-    children: [
-      {
-        path: 'postman',
-        component: () => import('@/views/Dashboard/index'),
-        name: 'Dashboard'
-      }
-    ]
-  },
+  
   { path: '*', redirect: '/404', hidden: true }
 ]
 

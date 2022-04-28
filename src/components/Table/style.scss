@@ -1,0 +1,158 @@
+$base-color: #746d69;
+$border-color: #cecece;
+$background-color: white;
+$hover-color: red;
+$active-color: blue;
+$tableFunction-width: 30px;
+@function opacityColor($opacity) {
+  @return rgba($base-color, $opacity);
+}
+@mixin ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.el-table th>.cell {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.el-table--group, .el-table--border {
+    border: 1px solid $border-color;
+}
+.el-table--border th, .el-table--border td {
+    border-right: 1px solid $border-color;
+}
+.el-table th.is-leaf, .el-table td {
+    border-bottom: 1px solid $border-color;
+}
+.tpfTable {
+    color: opacityColor(1);
+    position: relative;
+    .el-table {
+        width: calc(100% - $tableFunction-width);
+    }
+    &-tableFunction {
+        &__option {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: $tableFunction-width;
+            height: 100%;
+            z-index: 6;
+            border-top: 1px solid $border-color;
+            border-bottom: 1px solid $border-color;
+            border-right: 1px solid $border-color;
+            background-color: $background-color;
+            .item-column {
+                line-height: $tableFunction-width;
+                padding: 0.5em 0;
+                margin: 1em 0;
+                position: relative;
+                &.active {
+                    color: $active-color;
+                    &::before {
+                        content: "";
+                        height: 100%;
+                        width: 3px;
+                        display: inline-block;
+                        position: absolute;
+                        background: $active-color;
+                        left: -2px;
+                    }
+                }
+                &__icon {
+                    height: 1em;
+                    width: 1em;
+                    margin: 0 calc(($tableFunction-width - 1em)/2 - 0.5px);
+                }
+                &__title {
+                    margin: 0.5em 0 0 0;
+                    writing-mode: vertical-lr;
+                }
+                &:hover {
+                    color: $hover-color;
+                    cursor: pointer;
+                }
+            }
+        }
+        &__form {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 100%;
+            z-index: 5;
+            border-top: 1px solid $border-color;
+            border-bottom: 1px solid $border-color;
+            border-left: 1px solid $border-color;
+            background-color: $background-color;
+            overflow: hidden;
+            transition: width ease-in-out .5s;
+            padding-right: $tableFunction-width;
+            .form-columns {
+                margin-top: 30px;
+                padding: 0 20px;
+                &__column {
+                    @include ellipsis;
+                    svg {
+                        cursor: grab;
+                    }
+                }
+            }
+            .form-group {
+                .list-group {
+                    height: 60px;
+                    width: 80%;
+                    margin: auto;
+                    border: 1px dashed;
+                    line-height: 60px;
+                    text-align: center;
+                }
+            }
+        }
+        &.active {
+            .tpfTable-tableFunction {
+                &__form {
+                    width: 250px;
+                }
+                &__option {
+                    border-left: 1px solid $border-color;
+                    width: calc($tableFunction-width + 1px);
+                }
+            }
+        }
+        
+    }
+
+    &-headerRow {
+        
+    }
+    &-headerCell {
+        $widthLeft: 20px;
+        $widthRight: 15px;
+        &__left {
+            float: left;
+            width: $widthLeft;
+            height: 1em;
+        }
+        &__right {
+            float: right;
+            width: $widthRight;
+            height: 1em;
+        }
+        &__center {
+            display: inline-block;
+            width: calc(100% - $widthLeft - $widthRight);
+            text-align: center;
+            @include ellipsis;
+        }
+    }
+    &-row {
+        .textellipsis {
+            @include ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            white-space: initial;
+        }
+    }
+}
