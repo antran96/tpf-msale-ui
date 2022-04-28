@@ -15,6 +15,7 @@ import router from './router'
 import '@/utils/icon'
 import * as permission from '@/utils/permission'
 import * as fnCommon from '@/utils/fn-common'
+import * as validate from '@/utils/validate'
 require('./registerServiceWorker.js')
 permission.permissionRoute()
 
@@ -31,6 +32,7 @@ Vue.mixin({
   methods: {
     fnCookie: () => cookie,
     fnCommon: () => fnCommon,
+    validate: () => validate,
     permission: () => permission
   }
 })

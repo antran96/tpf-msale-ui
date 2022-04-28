@@ -7,8 +7,8 @@ const name = process.env.VUE_APP_TITLE
 const port = process.env.PORT
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'uat' ? '/webportal/v2/' : '/',
-  outputDir: '../server/public_v2',
+  publicPath: process.env.NODE_ENV === 'production' ? '/msale/' : process.env.NODE_ENV === 'uat' ? '/webportal/msale/' : '/',
+  outputDir: './dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,

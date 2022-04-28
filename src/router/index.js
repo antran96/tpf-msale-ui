@@ -23,6 +23,11 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/template',
+    component: () => import('@/views/Template/index'),
+    hidden: true
+  },
+  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
@@ -35,8 +40,10 @@ export const constantRoutes = [
       }
     ]
   },
-  // add route here
-  adminRouter
+  /* add route here */
+  adminRouter,
+  /* -------------- */
+  { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new Router({
