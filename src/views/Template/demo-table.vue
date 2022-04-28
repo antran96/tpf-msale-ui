@@ -19,21 +19,34 @@ export default {
     return {
       datatable: data,
       header: [
-        { key: 'name', title: 'Full Name', align: 'left', show: true },
-        { key: 'phone', title: 'Phone', align: 'center', show: true, type: 'phone' },
-        { key: 'email', title: 'Email', align: 'left', show: true },
-        { key: 'address', title: 'Address', align: 'left', show: true },
-        { key: 'postalZip', title: 'Postal Zip', align: 'left', show: true, type: 'number', filterType: 'number', filterKey: 'postalZip' },
-        { key: 'region', title: 'Region', align: 'left', show: true },
-        { key: 'country', title: 'Country', align: 'left', show: true },
-        { key: 'text', title: 'Notes', align: 'left', show: true, type: 'text', ellipsis: 3 },
-        { key: 'money', title: 'Money', align: 'center', show: true, type: 'currency' },
-        { key: 'alphanumeric', title: 'Code', align: 'center', show: true, type: 'mask' },
-        { key: 'createAt', title: 'CreateAt', align: 'center', show: true,
-          type: 'date', dateFormat: ['YYYY-MM-DD hh:mm:ss', 'DD/MM/YYYY hh:mm'], filterType: 'date', filterKey: 'createAt' }
+        { key: 'sale.username', title: 'User Name', align: 'left', show: true },
+        { key: 'sale.code', title: 'DSA Code', align: 'left', show: true },
+        { key: 'lead.id', title: 'ID', align: 'left', show: true },
+        { key: 'appIdFinnone', title: 'F1 ID', align: 'left', show: true },
+        { key: 'lead.fullName', title: 'Customer', align: 'left', show: true },
+        { key: 'lead.identify', title: 'Identify', align: 'left', show: true },
+        { key: 'branchCode', title: 'Branch Code', align: 'left', show: true },
+        { key: 'lead.income', title: 'Amount', align: 'left', show: true, type: 'currency' },
+        { key: 'status', title: 'Status', align: 'left', show: true },
+        { key: 'f1Status', title: 'F1Status', align: 'left', show: true },
+        { key: 'f1Stage', title: 'F1Stage', align: 'left', show: true },
+        { key: 'createdAt', title: 'CreateAt', align: 'center', show: true,
+          type: 'date', dateFormat: ['YYYY-MM-DD hh:mm:ss', 'DD/MM/YYYY'], filterType: 'date', filterKey: 'createAt' },
+        { key: 'updatedAt', title: 'UpdatedAt', align: 'center', show: true,
+          type: 'date', dateFormat: ['YYYY-MM-DD hh:mm:ss', 'DD/MM/YYYY'], filterType: 'date', filterKey: 'createAt' }
       ],
       loading: false
     }
+  },
+  created() {
+    this.$store.dispatch("common/fnRequest", "Applications")
+    .then(data => {
+      console.log(data)
+      this.datatable = data.data.data
+    })
+    .catch(err => {
+      console.log(err)
+    })
   },
   methods: {
     filterByDate(data) {

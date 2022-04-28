@@ -16,6 +16,11 @@ const state = {
       password: "Fico123!",
       username: "testlead"
     }
+  },
+  Applications: {
+    ...objState,
+    url: 'applications?page=0&limit=20&tab=New',
+    method: 'get'
   }
 }
 
