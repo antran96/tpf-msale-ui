@@ -195,8 +195,17 @@ export default {
     },
 
     handleLogin() {
-      document.cookie = 'token=8d037583-8724-457c-8f25-3f1e0009cdc2'
-      this.$router.push({ path: '/dashboard' })
+      // document.cookie = 'token=8d037583-8724-457c-8f25-3f1e0009cdc2'
+      // this.$router.push({ path: '/dashboard' })
+
+      this.$store.dispatch("common/fnRequest", "Login")
+        .then(data => {
+          console.log(data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+
       // return this.$refs["loginForm"].validate((valid, mess) => {
       //   if (valid) {
       //     return this.$store

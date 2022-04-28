@@ -31,15 +31,15 @@ const state = {
 }
 
 const actions = {
-  fnRequest({ dispatch, rootState }, model) {
+  fnRequest({ dispatch, rootState }, state) {
     return new Promise((resolve, reject) => {
-      rootState[model.root][model.state]._isLoading = true
+      rootState['api'][state]._isLoading = true
       let url = process.env.VUE_APP_API
       
       let service = axios.create({ baseURL: url, timeout: 5 * 60 * 1000 })
       let token = cookie.getToken()
       let options =
-        (({ url, method, responseType, params, data, headers }) => ({ url, method, responseType, params, data, headers }))(rootState[model.root][model.state])
+        (({ url, method, responseType, params, data, headers }) => ({ url, method, responseType, params, data, headers }))(rootState['api'][state])
 
       if (token) { options.headers = Object.assign({ Authorization: 'Bearer ' + token }, options.headers) }
       
@@ -48,7 +48,7 @@ const actions = {
       })
       
       service(options).then(success => {
-        dispatch('fnHandleSuccess', { model: model, success: success })
+        dispatch('fnHandleSuccess', { state: state, success: success })
         .then(data => {
           resolve(data)
         })
@@ -56,26 +56,25 @@ const actions = {
         dispatch('fnHandleError', { model: model, error: error })
         reject(error)
       }).finally(() => {
-        rootState[model.root][model.state]._isLoading = false
+        rootState['api'][state]._isLoading = false
         service = undefined
       })
     })
   },
 
-  fnHandleSuccess({ dispatch, rootState }, { model, success }) {
+  fnHandleSuccess({ dispatch, rootState }, { state, success }) {
     return new Promise((resolve) => {
-      rootState[model.root][model.state]._stt = 'success'
+      
       if (success.data === null) {
         resolve(success)
       } else if (Array.isArray(success.data)) {
-        rootState[model.root][model.state].list = success.data || []
-        rootState[model.root][model.state].total = success.headers['x-pagination-total'] || 0
+        // rootState[model.root][model.state].list = success.data || []
+        // rootState[model.root][model.state].total = success.headers['x-pagination-total'] || 0
       }
-
-      if (success.data && success.data.access_token) {
-        cookie.setToken(success.data.access_token, success.data.expires_in)
+      if (success.data && success.data.data && success.data.data.accessToken) {
+        cookie.setToken(success.data.data.accessToken)
       }
-      resolve(success.data)
+      resolve(success)
     })
   },
 
