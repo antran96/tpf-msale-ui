@@ -1,25 +1,26 @@
 <template>
   <div class="app-wrapper">
-    <sidebar class="sidebar-container" />
+    <silk-layout width="100%" height="100%" class-name="menu" />
+    <SideBar class="sidebar-container" />
     <div class="main-container">
       <div>
-        <navbar />
+        <NavBar />
       </div>
       <app-main />
     </div>
-    <right-panel />
+    <!-- <right-panel /> -->
   </div>
 </template>
 
 <script>
 import AppMain from "./AppMain";
-// import NavBar from "./NavBar";
-// import SideBar from "./SideBar";
+import NavBar from "./NavBar";
+import SideBar from "./SideBar";
 
 export default {
-  name: "Layout",
+  name: 'Layout',
 
-  components: { AppMain },
+  components: { AppMain, SideBar, NavBar},
 
   computed: {
     classObj() {

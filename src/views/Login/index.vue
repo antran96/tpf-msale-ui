@@ -13,13 +13,13 @@
             padding-left: 25rem;
           "
           :src="bgLogin"
-        />
+        >
       </div>
 
       <div class="login-page--form">
         <div style="margin-top: calc((70vh - 350px) / 2)">
           <div style="display: flex; justify-content: center">
-            <img style="width: 10%; height: 100%" src="icon.png" />
+            <img style="width: 10%; height: 100%" src="icon.png">
             <p style="font-size: 25px; margin-top: auto; margin-bottom: auto">
               TP Fico
             </p>
@@ -50,7 +50,7 @@
             <el-form-item v-if="signUp || forgotPwd" prop="email">
               <span class="svg-container">
                 <!-- <svg-icon icon-class="user" /> -->
-                <i class="el-icon-message"></i>
+                <i class="el-icon-message" />
               </span>
               <el-input
                 ref="email"
@@ -85,7 +85,6 @@
 
             <p
               v-if="login"
-              @click="handleForgotPwd"
               style="
                 text-align: right;
                 font-size: 13px;
@@ -94,16 +93,17 @@
                 margin-bottom: 20px;
                 cursor: pointer;
               "
+              @click="handleForgotPwd"
             >
               Forgot Password?
             </p>
 
             <div v-if="login" style="display: flex">
               <el-button
-              @click="handleLogin"
+                style="background-color: rgb(124 77 245)"
                 type="primary"
                 class="el-btn"
-                style="background-color: rgb(124 77 245)"
+                @click="handleLogin"
               >
                 Login
               </el-button>
@@ -118,7 +118,7 @@
             </div>
 
             <div v-if="signUp" style="display: flex">
-              <el-button round icon="el-icon-back" @click="backToLogin"></el-button>
+              <el-button round icon="el-icon-back" @click="backToLogin" />
               <el-button
                 type="primary"
                 class="el-btn"
@@ -130,7 +130,7 @@
             </div>
 
             <div v-if="forgotPwd" style="display: flex">
-              <el-button round icon="el-icon-back" @click="backToLogin"></el-button>
+              <el-button round icon="el-icon-back" @click="backToLogin" />
               <el-button
                 type="primary"
                 class="el-btn"
@@ -148,14 +148,14 @@
 </template>
 
 <script>
-import bgLogin from "@/assets/images/bgLogin6.png";
+import bgLogin from '@/assets/images/bgLogin6.png'
 export default {
-  name: "Login",
+  name: 'Login',
 
   data() {
     return {
-      model: { root: "user", state: "Login" },
-      passwordType: "password",
+      model: { root: 'user', state: 'Login' },
+      passwordType: 'password',
       capsTooltip: false,
       loading: false,
       showDialog: false,
@@ -164,8 +164,8 @@ export default {
       bgLogin: bgLogin,
       signUp: false,
       login: true,
-      forgotPwd: false,
-    };
+      forgotPwd: false
+    }
   },
   // created() {
   //   console.log(this.bgLogin);
@@ -184,19 +184,19 @@ export default {
   // }
   methods: {
     showPwd() {
-      if (this.passwordType === "password") {
-        this.passwordType = "";
+      if (this.passwordType === 'password') {
+        this.passwordType = ''
       } else {
-        this.passwordType = "password";
+        this.passwordType = 'password'
       }
       this.$nextTick(() => {
-        this.$refs.password.focus();
-      });
+        this.$refs.password.focus()
+      })
     },
 
     handleLogin() {
-      document.cookie = "token=8d037583-8724-457c-8f25-3f1e0009cdc2";
-      this.$router.push({ path: '/dashboard' });
+      document.cookie = 'token=8d037583-8724-457c-8f25-3f1e0009cdc2'
+      this.$router.push({ path: '/dashboard' })
       // return this.$refs["loginForm"].validate((valid, mess) => {
       //   if (valid) {
       //     return this.$store
@@ -242,28 +242,28 @@ export default {
     },
 
     handleSignUp() {
-      this.signUp = true;
-      this.login = false;
+      this.signUp = true
+      this.login = false
     },
 
     handleRegister() {
     },
 
     handleForgotPwd() {
-      this.forgotPwd = true;
-      this.login = false;
+      this.forgotPwd = true
+      this.login = false
     },
 
     handleSend() {
     },
 
-    backToLogin(){
-      this.login = true;
-      this.signUp = false;
-      this.forgotPwd = false;
+    backToLogin() {
+      this.login = true
+      this.signUp = false
+      this.forgotPwd = false
     }
-  },
-};
+  }
+}
 </script>
 
 <style lang="scss">

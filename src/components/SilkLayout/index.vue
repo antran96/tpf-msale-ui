@@ -15,7 +15,7 @@ export default {
     height: { type: [String, Number], default: 100 },
     width: { type: [String, Number], default: 100 },
     color: { type: Array, default: function() {
-      return [124, 77, 245]
+      return [113,35,214] 
     } },
     className: { type: String, default: '' }
   },
