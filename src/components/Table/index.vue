@@ -11,7 +11,7 @@
         <div class="form-columns">
           <draggable v-model="headerShow" :group="{ name: 'col', pull: 'clone', put: false }">
             <transition-group type="transition" name="flip-list">
-              <div v-for="element in headerShow" :key="element.key" class="form-columns__column">
+              <div v-for="element in header" :key="element.key" class="form-columns__column">
                 <svg-icon icon-class="drag" />
                 <el-checkbox v-model="element.show" class="form-columns__checkbox">{{ element.title }}</el-checkbox>
               </div>
@@ -36,6 +36,13 @@
         </div>
       </div>
     </div>
+
+    <div :class="[currentRow !== '' ? 'active' : '', 'tpfTable-tableFunction__inforRow']">
+      <div class="inforRow__header close-button">x</div>
+      <div>
+        <slot name="tpfTable-tableFunction__inforRow" />
+      </div>
+    </div>
     
     <el-table
       v-if="rerender"
@@ -55,10 +62,11 @@
       :row-style="rowStyle"
       :header-row-class-name="'tpfTable-headerRow '+headerRowClassName"
       :header-row-style="headerRowStyle"
-      row-key="name"
+      :row-key="rowKey"
       :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
       :empty-text="emptyText"
       :default-expand-all="defaultExpandAll"
+      @row-click="evCurrentRow"
     >
       <!-- <el-table-column v-if="checklist" type="selection" /> -->
       <!-- <el-table-column v-if="numRows" type="index" :index="renderIndex" align="center" /> -->
@@ -66,6 +74,7 @@
         v-for="item in headerShow"
         :key="item.key"
         :fixed="item.pin"
+        :align="item.align"
       >
         <template slot="header">
           <Header
@@ -88,14 +97,16 @@
             <div class="textellipsis" :style="'-webkit-line-clamp:'+item.ellipsis">{{ renderValue(scope.row, item.key) }}</div>
           </span>
           <span v-else-if="item.type && item.type === 'date'">
-            {{ $moment(renderValue(scope.row, item.key), item.dateFormat[0]).format(item.dateFormat[1]) }}
+            {{
+              $moment(renderValue(scope.row, item.key), item.dateFormat[0]).format(item.dateFormat[1]) !== 'Invalid date' ?
+              $moment(renderValue(scope.row, item.key), item.dateFormat[0]).format(item.dateFormat[1]) :
+              ''
+            }}
           </span>
-          <span v-else-if="item.type && item.type === 'Label'">
-            <tpf-label
-              :name-label="renderValue(scope.row, item.key)"
-              :bg-color="getColorLabel(scope.row, item.key)"
-              :color="'#FFFFF'"
-            />
+          <span v-else-if="item.type && item.type === 'label'">
+            <div class="labelTable" :style="'background-color:'+getColorLabel(scope.row, item)">
+              <span>{{ renderValue(scope.row, item.key) }}</span>
+            </div>
           </span>
           <span v-else-if="item.type && item.type === 'mask'">
             {{ renderValue(scope.row, item.key).substring(0, 3) + '****' + renderValue(scope.row, item.key).substring(renderValue(scope.row, item.key).length - 3, renderValue(scope.row, item.key).length) }}
@@ -134,21 +145,31 @@ export default {
     rowStyle: { type: Object, default: function() { return {} } },
     headerRowClassName: { type: String, default: '' },
     headerRowStyle: { type: Object, default: function() { return {} } },
-    rowKey: { type: String, default: '' },
+    rowKey: { type: String, default: 'id' },
     emptyText: { type: String, default: 'No data available' },
     defaultExpandAll: { type: Boolean, default: false }
   },
   data() {
     return {
       rerender: true,
+      currentRow: '',
       activeFunction: false,
       tableFunction: '',
       headerShow: [],
       listShow: [],
-      group: []
+      group: [],
+      listCol: []
     }
   },
   watch: {
+    currentRowKey: {
+      handler() {
+        this.currentRow = this.currentRowKey
+      },
+      deep: true,
+      immediate: true
+    },
+
     list: {
       handler() {
         this.listShow = [...this.list]
@@ -160,6 +181,7 @@ export default {
     header: {
       handler() {
         this.headerShow = []
+        this.listCol = []
         for (let i = 0; i < this.header.length; i++) {
           if (this.header[i].show) {
             const col = Object.assign(this.header[i], { 
@@ -168,6 +190,7 @@ export default {
               sortPrior: 0
             })
             this.headerShow.push(this.header[i])
+            this.listCol.push(this.header[i])
           }
         }
       },
@@ -177,7 +200,6 @@ export default {
 
     headerShow: {
       handler() {
-        console.log(this.headerShow)
         this.rerender = false
         this.$nextTick(() => {
           this.rerender = true
@@ -187,7 +209,13 @@ export default {
       immediate: true
     }
   },
+
   methods: {
+    getColorLabel(row, item) {
+      const value = this.renderValue(row, item.key)
+      const getColor = item.defineLabel[value]
+      return getColor
+    },
     addGroup(evt) {
       const group = evt.added.element.key
       const newData = [];
@@ -197,7 +225,7 @@ export default {
         if (findKey === -1) {
           const obj = {}
           obj[group] = getValue
-          obj.name = getValue
+          obj[this.rowKey] = getValue
           const newObj = Object.assign(obj, { children: [this.list[i]] })
           newData.push(newObj)
         } else {
@@ -266,6 +294,18 @@ export default {
     },
     filterByNumber({ from, to, key }) {
       this.$emit('filterByNumber', { from, to, key })
+    },
+
+    evCurrentRow(row, column, event) {
+      if (this.currentRow !== null && this.currentRow === row.id) {
+        this.$refs.Table.setCurrentRow([])
+        this.currentRow = ''
+        this.$emit('removeCurrentRow', row)
+      } else {
+        this.currentRow = row.id
+        this.$refs.Table.toggleRowSelection(row);
+        this.$emit('currentRow', row)
+      }
     },
   }
 }

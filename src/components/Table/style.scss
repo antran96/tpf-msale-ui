@@ -4,9 +4,12 @@ $background-color: white;
 $hover-color: red;
 $active-color: blue;
 $tableFunction-width: 30px;
-@function opacityColor($opacity) {
+@function opacityBaseColor($opacity) {
   @return rgba($base-color, $opacity);
 }
+@function opacityColor($color, $opacity) {
+    @return rgba($color, $opacity);
+  }
 @mixin ellipsis {
     white-space: nowrap;
     overflow: hidden;
@@ -26,12 +29,31 @@ $tableFunction-width: 30px;
     border-bottom: 1px solid $border-color;
 }
 .tpfTable {
-    color: opacityColor(1);
+    color: opacityBaseColor(1);
     position: relative;
     .el-table {
         width: calc(100% - $tableFunction-width);
     }
     &-tableFunction {
+        &__inforRow {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 100%;
+            z-index: 6;
+            border-top: 1px solid $border-color;
+            border-bottom: 1px solid $border-color;
+            border-left: 1px solid $border-color;
+            border-right: 1px solid $border-color;
+            background-color: #fff;
+            overflow: hidden;
+            -webkit-transition: width ease-in-out .5s;
+            transition: width ease-in-out .5s;
+            &.active {
+                width: 70%;
+            }
+        }
         &__option {
             position: absolute;
             top: 0;
@@ -153,6 +175,21 @@ $tableFunction-width: 30px;
             display: -webkit-box;
             -webkit-box-orient: vertical;
             white-space: initial;
+        }
+        .labelTable {
+            border: 1px solid;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 3px 10px;
+            border-radius: 16px;
+            color: #FFF;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            white-space: initial;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 2;
+            opacity: 0.6;
         }
     }
 }

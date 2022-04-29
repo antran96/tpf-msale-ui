@@ -6,7 +6,11 @@
       :loading="loading"
       @filterByDate="filterByDate"
       @filterByNumber="filterByNumber"
-    />
+    >
+      <template v-slot:tpfTable-tableFunction__inforRow>
+        <div>OK</div>
+      </template>
+    </tpf-table>
     <el-button v-loading="loading" @click="loading = true">Loading</el-button>
   </div>
 </template>
@@ -17,23 +21,42 @@ export default {
   name: 'DemoTable',
   data() {
     return {
-      datatable: data,
+      datatable: [],
       header: [
-        { key: 'name', title: 'Full Name', align: 'left', show: true },
-        { key: 'phone', title: 'Phone', align: 'center', show: true, type: 'phone' },
-        { key: 'email', title: 'Email', align: 'left', show: true },
-        { key: 'address', title: 'Address', align: 'left', show: true },
-        { key: 'postalZip', title: 'Postal Zip', align: 'left', show: true, type: 'number', filterType: 'number', filterKey: 'postalZip' },
-        { key: 'region', title: 'Region', align: 'left', show: true },
-        { key: 'country', title: 'Country', align: 'left', show: true },
-        { key: 'text', title: 'Notes', align: 'left', show: true, type: 'text', ellipsis: 3 },
-        { key: 'money', title: 'Money', align: 'center', show: true, type: 'currency' },
-        { key: 'alphanumeric', title: 'Code', align: 'center', show: true, type: 'mask' },
-        { key: 'createAt', title: 'CreateAt', align: 'center', show: true,
-          type: 'date', dateFormat: ['YYYY-MM-DD hh:mm:ss', 'DD/MM/YYYY hh:mm'], filterType: 'date', filterKey: 'createAt' }
+        { key: 'sale.username', title: 'User Name', align: 'left', show: true },
+        { key: 'sale.code', title: 'DSA Code', align: 'left', show: true },
+        { key: 'lead.id', title: 'ID', align: 'left', show: true },
+        { key: 'appIdFinnone', title: 'F1 ID', align: 'left', show: true },
+        { key: 'lead.fullName', title: 'Customer', align: 'left', show: true },
+        { key: 'lead.identify', title: 'Identify', align: 'left', show: true },
+        { key: 'branchCode', title: 'Branch Code', align: 'left', show: true },
+        { key: 'lead.income', title: 'Amount', align: 'left', show: true, type: 'currency' },
+        { key: 'status', title: 'Status', align: 'center', show: true, type: 'label',
+          defineLabel: { 'F1_ERROR': '#ff0000', 'F1_OTHER': '#008000', 'F1_RAISE_QUERY_SUBMITTED': 'blue' } },
+        { key: 'f1Status', title: 'F1Status', align: 'left', show: true },
+        { key: 'f1Stage', title: 'F1Stage', align: 'left', show: true },
+        { key: 'createdAt', title: 'CreateAt', align: 'center', show: true,
+          type: 'date', dateFormat: ['YYYY-MM-DD hh:mm:ss', 'DD/MM/YYYY'], filterType: 'date', filterKey: 'createAt' },
+        { key: 'updatedAt', title: 'UpdatedAt', align: 'center', show: true,
+          type: 'date', dateFormat: ['YYYY-MM-DD hh:mm:ss', 'DD/MM/YYYY'], filterType: 'date', filterKey: 'createAt' }
       ],
       loading: false
     }
+  },
+  created() {
+    this.loading = true
+    setTimeout(() => {
+      this.loading = false
+      this.datatable = data.data
+    }, 1000);
+    // this.$store.dispatch("common/fnRequest", "Applications")
+    // .then(data => {
+    //   this.loading = false
+    //   this.datatable = data.data.data
+    // })
+    // .catch(err => {
+    //   console.log(err)
+    // })
   },
   methods: {
     filterByDate(data) {
