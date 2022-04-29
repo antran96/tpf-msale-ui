@@ -32,11 +32,11 @@
 // import DialogAccount from './dialog-account'
 
 export default {
-  name: 'Account',
+  name: 'Permissions',
   // components: { DialogAccount },
   data() {
     return {
-      model: { root: 'admin', state: 'Account' },
+      // model: { root: 'admin', state: 'Account' },
       dialog: {},
       isEdit: false
     }

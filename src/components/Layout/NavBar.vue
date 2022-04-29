@@ -16,35 +16,18 @@
         <el-tooltip class="item" effect="dark" :content="isFullscreen ? 'exit' : 'Full Screen'" placement="bottom">
           <svg-icon :icon-class="isFullscreen ? 'min-arrows' : 'max-arrows'" class-name="right-menu-func--svg" @click="fnFullScreen" />
         </el-tooltip>
-
-        <!-- <el-tooltip class="item" effect="dark" content="User Online" placement="bottom">
-          <svg-icon icon-class="user-chat" class-name="right-menu-func--svg" @click="showUserOnline" />
-        </el-tooltip> -->
-
-        <!-- <el-tooltip class="item" effect="dark" content="Version" placement="bottom">
-          <p class="right-menu-func--version" @click="$router.push({ path: '/release-notes' })">
-            <span style="font-family: fangsong;">V</span>
-            <span style="font-weight: bold;"> {{ version }}</span>
-          </p>
-        </el-tooltip> -->
       </div>
       
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
           <el-tooltip class="item" effect="dark" :content="user.user_name || user.username" placement="bottom">
-            <svg-icon :icon-class="user.optional && user.optional.avatar ? user.optional.avatar : settings().dfAvatar" class-name="avatar-user"/>
+            <svg-icon :icon-class="user.optional && user.optional.avatar ? user.optional.avatar : 'penguin1'" class-name="avatar-user"/>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" content="Online" placement="bottom">
             <div class="avatar-container--status online"></div>
           </el-tooltip>
         </div>
         <el-dropdown-menu slot="dropdown">
-          <!-- <el-dropdown-item>
-            <span style="display:block;" @click="fnAwait">Await</span>
-          </el-dropdown-item>
-          <el-dropdown-item>
-            <span style="display:block;" @click="fnSleep">Sleep</span>
-          </el-dropdown-item> -->
           <router-link to="/profile/me">
             <el-dropdown-item>Profile</el-dropdown-item>
           </router-link>
@@ -276,7 +259,7 @@ export default {
     }
 
     .page-title {
-      z-index: -1;
+      z-index: 0;
       text-align: center;
       height: 47px;
       line-height: 47px;
@@ -286,7 +269,8 @@ export default {
       span {
         font-size: 19px;
         font-weight: bold;
-        color: var(--clForm100);
+        // color: var(--clForm100);
+        color: rgb(124 77 245);
       }
     }
   }

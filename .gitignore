@@ -1,7 +1,7 @@
 
 # Created by https://www.toptal.com/developers/gitignore/api/vuejs,node,visualstudiocode,macos,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=vuejs,node,visualstudiocode,macos,windows
-
+~$API.xlsx
 ### macOS ###
 # General
 .DS_Store

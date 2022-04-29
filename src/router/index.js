@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import adminRouter from './modules/admin'
+import managementRouter from './modules/management'
 
 Vue.use(Router)
 
@@ -42,6 +43,7 @@ export const constantRoutes = [
   },
   /* add route here */
   adminRouter,
+  managementRouter,
   /* -------------- */
   { path: '*', redirect: '/404', hidden: true }
 ]

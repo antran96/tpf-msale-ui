@@ -24,7 +24,13 @@
               TP Fico
             </p>
           </div>
-          <el-form class="login-form" autocomplete="on" label-position="left">
+          <el-form
+            ref="loginForm"
+            :model="state['api'].Login.data"
+            class="login-form"
+            autocomplete="on"
+            label-position="left"
+          >
             <div class="title-container">
               <div class="title">
                 <p>Welcome to MSale</p>
@@ -39,6 +45,7 @@
               </span>
               <el-input
                 ref="username"
+                v-model="state['api'].Login.data.username"
                 placeholder="Username"
                 name="username"
                 type="text"
@@ -62,16 +69,23 @@
               />
             </el-form-item>
 
-            <el-tooltip v-if="!forgotPwd">
+            <el-tooltip v-if="!forgotPwd" v-model="capsTooltip" content="Caps lock is On" placement="right" manual>
               <el-form-item prop="password">
                 <span class="svg-container">
                   <svg-icon icon-class="password" />
                 </span>
                 <el-input
+                  :key="passwordType"
+                  ref="password"
+                  v-model="state['api'].Login.data.password"
                   placeholder="Password"
+                  :type="passwordType"
                   name="password"
                   tabindex="2"
                   autocomplete="on"
+                  @keyup.native="checkCapslock"
+                  @blur="capsTooltip = false"
+                  @keyup.enter.native="handleLogin"
                 />
                 <span class="show-pwd" @click="showPwd">
                   <svg-icon
@@ -167,22 +181,35 @@ export default {
       forgotPwd: false
     }
   },
-  // created() {
-  //   console.log(this.bgLogin);
-  // },
-  // computed: {
-  //   styleDynamic: function () {
-  //     const color = [124, 77, 245];
-  //     const strColor = color[0] + "," + color[1] + "," + color[2] + ",";
-  //     const objStyles = {
-  //       "--clForm100": "rgba(" + strColor + "1)",
-  //       "--clForm50": "rgba(" + strColor + "0.5)",
-  //       "--clForm10": "rgba(" + strColor + "0.1)",
-  //     }
-  //     return objStyles
-  //   }
-  // }
+
+  created() {
+  },
+
+  mounted() {
+    if (this.state.api.Login.data.username === '') {
+      this.$refs.username.focus()
+    } else if (this.state.api.Login.data.password === '') {
+      this.$refs.password.focus()
+    }
+  },
+
   methods: {
+    checkCapslock({ shiftKey, key } = {}) {
+      if (key && key.length === 1) {
+        if (
+          (shiftKey && key >= 'a' && key <= 'z') ||
+          (!shiftKey && key >= 'A' && key <= 'Z')
+        ) {
+          this.capsTooltip = true
+        } else {
+          this.capsTooltip = false
+        }
+      }
+      if (key === 'CapsLock' && this.capsTooltip === true) {
+        this.capsTooltip = false
+      }
+    },
+
     showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''
@@ -195,59 +222,20 @@ export default {
     },
 
     handleLogin() {
-      // document.cookie = 'token=8d037583-8724-457c-8f25-3f1e0009cdc2'
-      // this.$router.push({ path: '/dashboard' })
-
-      this.$store.dispatch("common/fnRequest", "Login")
-        .then(data => {
-          console.log(data)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-
-      // return this.$refs["loginForm"].validate((valid, mess) => {
-      //   if (valid) {
-      //     return this.$store
-      //       .dispatch("common/fnRequest", { root: "user", state: "Login" })
-      //       .then((success) => {
-      //         this.$refs["loginForm"].resetFields();
-      //         return this.$store.dispatch("common/fnRequest", {
-      //           root: "user",
-      //           state: "GetInfor",
-      //         });
-      //       })
-      //       .then((data) => {
-      //         this.fnCookie().setInforUser(data);
-      //         this.$store.dispatch("user/updateUserTeamInfo", {
-      //           infor: data,
-      //           flag: true,
-      //         });
-      //         if (
-      //           data &&
-      //           data.optional &&
-      //           data.optional.settings &&
-      //           data.optional.settings.redirect
-      //         ) {
-      //           this.$router.push({
-      //             path: data.optional.settings.redirect,
-      //             query: this.otherQuery,
-      //           });
-      //         } else {
-      //           this.$router.push({ path: "/", query: this.otherQuery });
-      //         }
-      //       });
-      //   } else {
-      //     this.state.app.confirm.open({
-      //       message:
-      //         '<span class="txtNotice">' +
-      //         mess[Object.keys(mess)[0]][0].message +
-      //         "</span>",
-      //     });
-      //     // this.$showMess('error', message)
-      //     return false;
-      //   }
-      // });
+      return this.$refs['loginForm'].validate((valid, mess) => {
+        if (valid) {
+          return this.$store.dispatch('common/fnRequest', 'Login').then((success) => {
+            this.state.api.ProfileUser.params.username = this.state.api.Login.data.username
+            this.$refs['loginForm'].resetFields()
+            this.$router.push({ path: '/dashboard' })
+            return this.$store.dispatch('common/fnRequest', 'ProfileUser')
+          })
+        } else {
+          this.state.app.confirm.open({ message: '<span class="txtNotice">' + mess[Object.keys(mess)[0]][0].message + '</span>' })
+          // this.$showMess('error', message)
+          return false
+        }
+      })
     },
 
     handleSignUp() {
@@ -287,12 +275,12 @@ export default {
       -webkit-appearance: none;
       border-radius: 0px;
       padding: 12px 5px 12px 15px;
-      color: #ffffff;
+      color: black;
       height: 40px;
       caret-color: #ffffff;
       &:-webkit-autofill {
         box-shadow: 0 0 0px 1000px var(--clForm100) inset !important;
-        -webkit-text-fill-color: #ffffff !important;
+        -webkit-text-fill-color: black !important;
       }
     }
   }
