@@ -83,9 +83,8 @@ export default {
     },
 
     getListUsers (){
-      return this.$store.dispatch('common/fnRequest', 'ListUser').then((data) => {
-        console.log('dataaaaaaaaa', data)
-        // console.log('tableeeeeeeeeeeeeee', this.tableData)
+      return this.$store.dispatch('common/fnRequest', 'ListUser').then((model) => {
+        this.tableData = model.data.data;
       })
     }
   }

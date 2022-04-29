@@ -15,7 +15,7 @@
 import AppMain from "./AppMain";
 import NavBar from "./NavBar";
 import SideBar from "./SideBar";
-import RightPanel from "./RightPanel";
+import RightPanel from "./RightPanel"
 
 export default {
   name: "Layout",
