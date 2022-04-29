@@ -13,8 +13,8 @@ const state = {
     //   sort: 'createdAt,desc'
     // }
     data: {
-      password: "",
-      username: ""
+      password: "Fico123!",
+      username: "testlead"
     }
   },
   Applications: {

@@ -6,7 +6,11 @@
       :loading="loading"
       @filterByDate="filterByDate"
       @filterByNumber="filterByNumber"
-    />
+    >
+      <template v-slot:tpfTable-tableFunction__inforRow>
+        <div>OK</div>
+      </template>
+    </tpf-table>
     <el-button v-loading="loading" @click="loading = true">Loading</el-button>
   </div>
 </template>
@@ -17,7 +21,7 @@ export default {
   name: 'DemoTable',
   data() {
     return {
-      datatable: data,
+      datatable: [],
       header: [
         { key: 'sale.username', title: 'User Name', align: 'left', show: true },
         { key: 'sale.code', title: 'DSA Code', align: 'left', show: true },
@@ -27,7 +31,8 @@ export default {
         { key: 'lead.identify', title: 'Identify', align: 'left', show: true },
         { key: 'branchCode', title: 'Branch Code', align: 'left', show: true },
         { key: 'lead.income', title: 'Amount', align: 'left', show: true, type: 'currency' },
-        { key: 'status', title: 'Status', align: 'left', show: true },
+        { key: 'status', title: 'Status', align: 'center', show: true, type: 'label',
+          defineLabel: { 'F1_ERROR': '#ff0000', 'F1_OTHER': '#008000', 'F1_RAISE_QUERY_SUBMITTED': 'blue' } },
         { key: 'f1Status', title: 'F1Status', align: 'left', show: true },
         { key: 'f1Stage', title: 'F1Stage', align: 'left', show: true },
         { key: 'createdAt', title: 'CreateAt', align: 'center', show: true,
@@ -39,14 +44,19 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("common/fnRequest", "Applications")
-    .then(data => {
-      console.log(data)
-      this.datatable = data.data.data
-    })
-    .catch(err => {
-      console.log(err)
-    })
+    this.loading = true
+    setTimeout(() => {
+      this.loading = false
+      this.datatable = data.data
+    }, 1000);
+    // this.$store.dispatch("common/fnRequest", "Applications")
+    // .then(data => {
+    //   this.loading = false
+    //   this.datatable = data.data.data
+    // })
+    // .catch(err => {
+    //   console.log(err)
+    // })
   },
   methods: {
     filterByDate(data) {
