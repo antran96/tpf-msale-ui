@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <silk-layout width="100%" height="100%" class-name="menu" /> -->
+    <silk-layout width="100%" height="100%" class-name="menu" />
 
     <div class="sidebar-logo" :class="{'collapse': state.app.sidebar}">
       <router-link class="sidebar-logo--link" to="/">

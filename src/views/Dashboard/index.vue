@@ -11,6 +11,9 @@ export default {
     return {
     }
   },
+  created() {
+    return this.$store.dispatch('common/fnRequest', 'Dashboard')
+  },
   methods: {
   }
 }
