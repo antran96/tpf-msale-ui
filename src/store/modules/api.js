@@ -12,7 +12,6 @@ const state = {
       password: [{ required: true, trigger: ['blur', 'change'] }]
     },
     data: {
-<<<<<<< HEAD
       password: '',
       username: ''
     }
@@ -143,10 +142,6 @@ const state = {
     params: {
       limit: '',
       page: ''
-=======
-      password: "Fico123!",
-      username: "testlead"
->>>>>>> 7897d6a9ffd2c04aafa34f365358134b73d56c2d
     }
   },
   Applications: {
